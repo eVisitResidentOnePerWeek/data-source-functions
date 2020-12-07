@@ -41,7 +41,8 @@ namespace Plumsail.DataSource.SharePoint
             var queryOptions = new List<QueryOption>()
             {
                 new QueryOption("select", "id"),
-                new QueryOption("expand", "fields(select=Title,Author)")
+                new QueryOption("filter", $"fields/Title eq '{req.Query["info"]}'"),
+                new QueryOption("expand", "fields(select=Title,Author,OrderNumber)")
             };
             var itemsPage = await list.Items
                 .Request(queryOptions)
